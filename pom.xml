@@ -10,6 +10,8 @@
     <modules>
         <module>chapter1</module>
         <module>chapter2</module>
+        <module>chapter2-db-client</module>
+        <module>chapter2-db-server</module>
     </modules>
     <packaging>pom</packaging>
 

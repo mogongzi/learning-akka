@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>chapter2-future</artifactId>
+    <artifactId>chapter2-db-client</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
