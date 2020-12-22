@@ -4,11 +4,10 @@ import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
 import akka.testkit.TestActorRef;
-import me.ryan.learnakka.AkkaKVDbActor;
 import me.ryan.learnakka.message.SetRequest;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class AkkaKVDbActorTest {
 
