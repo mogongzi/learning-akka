@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>chapter1</module>
-        <module>chapter2</module>
+        <module>chapter2-future</module>
         <module>chapter2-db-client</module>
         <module>chapter2-db-server</module>
         <module>chapter3</module>
