@@ -18,6 +18,6 @@ public class AkkaKVDbActorTest {
         TestActorRef<AkkaKVDbActor> actorRef = TestActorRef.create(system, Props.create(AkkaKVDbActor.class));
         actorRef.tell(new SetRequest("key1", "value1"), ActorRef.noSender());
         AkkaKVDbActor actor = actorRef.underlyingActor();
-        assertEquals(actor.map.get("key1"), "value1");
+        assertEquals("value1", actor.map.get("key1"));
     }
 }

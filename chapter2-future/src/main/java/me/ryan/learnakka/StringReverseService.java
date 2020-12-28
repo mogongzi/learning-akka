@@ -15,7 +15,7 @@ public class StringReverseService {
     ActorSystem system = ActorSystem.create();
     ActorRef actorRef = system.actorOf(Props.create(StringReverseActor.class));
 
-    public String get(String original) throws Exception {
+    public String get(String original) throws InterruptedException, ExecutionException, TimeoutException {
         Future sFuture = ask(actorRef, original, 1000);
         final CompletionStage<String> cs = FutureConverters.asJava(sFuture);
         final CompletableFuture<String> jFuture = (CompletableFuture<String>) cs;

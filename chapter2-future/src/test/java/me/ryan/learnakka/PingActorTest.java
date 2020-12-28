@@ -52,7 +52,7 @@ public class PingActorTest {
     @Test
     public void shouldTransformAsync() throws Exception {
         CompletionStage cs = askPong("Ping").thenCompose(x -> askPong("Ping"));
-        assertEquals(get(cs), "Pong");
+        assertEquals("Pong", get(cs));
     }
 
     @Test
