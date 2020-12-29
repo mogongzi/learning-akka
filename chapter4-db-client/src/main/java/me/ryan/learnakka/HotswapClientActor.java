@@ -16,7 +16,7 @@ public class HotswapClientActor extends AbstractActorWithStash {
         this.remoteDb = getContext().actorSelection(remoteAddress);
 
         this.online = receiveBuilder()
-                .match(Request.class, x -> remoteDb.forward(x, context())).build();
+                .match(Request.class, x -> remoteDb.forward(x, getContext())).build();
 
         this.disconnected = receiveBuilder()
                 .match(Request.class, x -> {
