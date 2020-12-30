@@ -33,9 +33,7 @@ public class AskDemoArticleParser extends AbstractActor {
                 .match(ParseArticle.class, msg -> {
                     final CompletionStage cacheResult = FutureConverters.asJava(ask(cacheActor, new GetRequest(msg.getUrl()), timeout));
                     final CompletionStage result = cacheResult.handle((x, t) -> {
-                        return (x != null) ?
-                                CompletableFuture.completedFuture(x)
-                                : FutureConverters.asJava(ask(httpClientActor, msg.getUrl(), timeout))
+                        return (x != null) ? CompletableFuture.completedFuture(x) : FutureConverters.asJava(ask(httpClientActor, msg.getUrl(), timeout))
                                 .thenCompose(rawArticle -> FutureConverters.asJava(ask(articleParseActor, new ParseHtmlArticle(msg.getUrl(), ((HttpResponse) rawArticle).getBody()), timeout)));
                     }).thenCompose(x -> x);
 
