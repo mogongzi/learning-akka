@@ -18,7 +18,6 @@ import static org.junit.Assert.*;
 public class HotswapClientActorTest {
 
     ActorSystem system = ActorSystem.create("testSystem", ConfigFactory.defaultReference());
-    Timeout timeout = Timeout.create(Duration.ofMillis(10000));
 
     @Test
     public void itShouldSet() {
