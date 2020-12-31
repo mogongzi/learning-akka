@@ -5,15 +5,12 @@ import akka.actor.Props;
 import akka.actor.Status;
 import akka.testkit.TestActorRef;
 import akka.testkit.TestProbe;
-import akka.util.Timeout;
 import com.typesafe.config.ConfigFactory;
 import me.ryan.learnakka.message.GetRequest;
 import me.ryan.learnakka.message.SetRequest;
 import org.junit.Test;
 
-import java.time.Duration;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class FSMClientActorTest {
 
