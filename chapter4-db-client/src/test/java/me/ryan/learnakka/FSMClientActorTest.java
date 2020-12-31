@@ -2,6 +2,7 @@ package me.ryan.learnakka;
 
 import akka.actor.ActorSystem;
 import akka.actor.Props;
+import akka.actor.Status;
 import akka.testkit.TestActorRef;
 import akka.testkit.TestProbe;
 import akka.util.Timeout;
@@ -35,10 +36,11 @@ public class FSMClientActorTest {
     public void itShouldFlushMessagesInConnectedAndPending() {
         TestActorRef<FSMClientActor> fsmClientRef = TestActorRef.create(system, Props.create(FSMClientActor.class, dbRef.path().toString()));
 
-        fsmClientRef.tell(new SetRequest("testkey", "testvalue"), probe.ref());
+        fsmClientRef.tell(new SetRequest("testkey", "testvalue", probe.ref()), probe.ref());
         assertEquals(State.CONNECTED_AND_PENDING, fsmClientRef.underlyingActor().stateName());
 
         fsmClientRef.tell(new FlushMessage(), probe.ref());
+        probe.expectMsgClass(Status.Success.class);
         assertEquals(State.CONNECTED, fsmClientRef.underlyingActor().stateName());
     }
 }
