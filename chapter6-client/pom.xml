@@ -9,19 +9,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>chapter5</artifactId>
+    <artifactId>chapter6-client</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.syncthemall</groupId>
-            <artifactId>boilerpipe</artifactId>
-            <version>1.2.2</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.jason-goodwin/better-monads -->
-        <dependency>
-            <groupId>com.jason-goodwin</groupId>
-            <artifactId>better-monads</artifactId>
-            <version>0.4.1</version>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-cluster-tools_2.13</artifactId>
+            <version>${akka.version}</version>
         </dependency>
     </dependencies>
 

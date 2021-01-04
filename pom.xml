@@ -16,6 +16,8 @@
         <module>chapter4-db-server</module>
         <module>chapter4-db-client</module>
         <module>chapter5</module>
+        <module>chapter6-server</module>
+        <module>chapter6-client</module>
     </modules>
     <packaging>pom</packaging>
 
