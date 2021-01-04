@@ -2,16 +2,18 @@ package me.ryan.learnakka;
 
 import akka.actor.AbstractActorWithStash;
 import akka.actor.ActorSelection;
-import me.ryan.learnakka.message.*;
+import me.ryan.learnakka.message.Connected;
+import me.ryan.learnakka.message.Ping;
+import me.ryan.learnakka.message.Request;
 
-public class HotswapClientActor extends AbstractActorWithStash {
+public class IdentifyRemoteHotswapClientActor extends AbstractActorWithStash {
 
     private ActorSelection remoteDb;
 
     private final Receive disconnected;
     private final Receive online;
 
-    public HotswapClientActor(String remoteAddress) {
+    public IdentifyRemoteHotswapClientActor(String remoteAddress) {
         this.remoteDb = getContext().actorSelection(remoteAddress);
 
         this.online = receiveBuilder()

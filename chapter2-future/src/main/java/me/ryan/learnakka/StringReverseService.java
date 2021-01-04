@@ -4,11 +4,11 @@ import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
 import scala.concurrent.Future;
-import scala.jdk.javaapi.FutureConverters;
 
 import java.util.concurrent.*;
 
 import static akka.pattern.Patterns.ask;
+import static scala.compat.java8.FutureConverters.toJava;
 
 public class StringReverseService {
 
@@ -17,7 +17,7 @@ public class StringReverseService {
 
     public String get(String original) throws InterruptedException, ExecutionException, TimeoutException {
         Future sFuture = ask(actorRef, original, 1000);
-        final CompletionStage<String> cs = FutureConverters.asJava(sFuture);
+        final CompletionStage<String> cs = toJava(sFuture);
         final CompletableFuture<String> jFuture = (CompletableFuture<String>) cs;
         return jFuture.get(1000, TimeUnit.MILLISECONDS);
     }

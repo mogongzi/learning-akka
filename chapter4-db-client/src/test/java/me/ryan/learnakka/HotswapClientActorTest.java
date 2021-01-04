@@ -7,6 +7,7 @@ import akka.testkit.TestActorRef;
 import akka.testkit.TestProbe;
 import com.typesafe.config.ConfigFactory;
 import me.ryan.learnakka.message.GetRequest;
+import me.ryan.learnakka.message.Ping;
 import me.ryan.learnakka.message.SetRequest;
 import org.junit.Test;
 
@@ -41,6 +42,17 @@ public class HotswapClientActorTest {
 
         clientRef.tell(new GetRequest("testkey"), probe.ref());
         probe.expectMsg("testvalue");
+    }
+
+    @Test
+    public void itShouldReturnConnectedWithPing() {
+        TestActorRef<AkkaKVDbActor> dbRef = TestActorRef.create(system, Props.create(AkkaKVDbActor.class));
+
+        TestProbe probe = TestProbe.apply(system);
+        TestActorRef<HotswapClientActor> clientRef = TestActorRef.create(system, Props.create(HotswapClientActor.class, dbRef.path().toString()));
+
+        clientRef.tell(new Ping(), probe.ref());
+        probe.expectMsg("Connected");
     }
 
 }

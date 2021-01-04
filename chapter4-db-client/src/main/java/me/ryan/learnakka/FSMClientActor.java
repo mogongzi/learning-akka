@@ -42,7 +42,7 @@ public class FSMClientActor extends AbstractFSM<State, EventQueue> {
 
         when(CONNECTED_AND_PENDING, matchEvent(FlushMessage.class, (msg, container) -> {
                     remoteDb.tell(container, self());
-                    container = new EventQueue();
+                    container.clear();
                     return goTo(CONNECTED);
                 }).event(Request.class, (msg, container) -> {
                     container.add(msg);

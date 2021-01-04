@@ -4,10 +4,7 @@ import akka.actor.AbstractActor;
 import akka.actor.Status;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
-import me.ryan.learnakka.message.Connected;
-import me.ryan.learnakka.message.GetRequest;
-import me.ryan.learnakka.message.KeyNotFoundException;
-import me.ryan.learnakka.message.SetRequest;
+import me.ryan.learnakka.message.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +17,9 @@ public class AkkaKVDbActor extends AbstractActor {
     @Override
     public Receive createReceive() {
         return receiveBuilder()
+                .match(Ping.class, message -> {
+                    sender().tell("Connected", self());
+                })
                 .match(Connected.class, message -> {
                     log.info("Received Connected request: {}", message);
                     sender().tell(new Connected(), self());

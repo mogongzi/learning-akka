@@ -11,7 +11,6 @@ import me.ryan.learnakka.message.GetRequest;
 import me.ryan.learnakka.message.SetRequest;
 import org.junit.Test;
 import scala.concurrent.Future;
-import scala.jdk.javaapi.FutureConverters;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,6 +18,7 @@ import java.util.concurrent.*;
 
 import static akka.pattern.Patterns.ask;
 import static org.junit.Assert.assertEquals;
+import static scala.compat.java8.FutureConverters.toJava;
 
 public class AkkaKVDbActorTest {
 
@@ -62,7 +62,7 @@ public class AkkaKVDbActorTest {
         actorRef.underlyingActor().map.put("key", "value");
 
         Future sFuture = ask(actorRef, new GetRequest("key", testProbe.ref()), 1000);
-        final CompletionStage<String> cs = FutureConverters.asJava(sFuture);
+        final CompletionStage<String> cs = toJava(sFuture);
         final CompletableFuture<String> jFuture = (CompletableFuture<String>)cs;
         assertEquals("value", jFuture.get(1000, TimeUnit.MILLISECONDS));
     }

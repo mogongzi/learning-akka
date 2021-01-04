@@ -6,12 +6,12 @@ import akka.actor.ActorSelection;
 import akka.actor.Status;
 import akka.util.Timeout;
 import me.ryan.learnakka.message.GetRequest;
-import scala.jdk.javaapi.FutureConverters;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
 import static akka.pattern.Patterns.ask;
+import static scala.compat.java8.FutureConverters.toJava;
 
 public class AskDemoArticleParser extends AbstractActor {
 
@@ -31,10 +31,10 @@ public class AskDemoArticleParser extends AbstractActor {
     public Receive createReceive() {
         return receiveBuilder()
                 .match(ParseArticle.class, msg -> {
-                    final CompletionStage cacheResult = FutureConverters.asJava(ask(cacheActor, new GetRequest(msg.getUrl()), timeout));
+                    final CompletionStage cacheResult = toJava(ask(cacheActor, new GetRequest(msg.getUrl()), timeout));
                     final CompletionStage result = cacheResult.handle((x, t) -> {
-                        return (x != null) ? CompletableFuture.completedFuture(x) : FutureConverters.asJava(ask(httpClientActor, msg.getUrl(), timeout))
-                                .thenCompose(rawArticle -> FutureConverters.asJava(ask(articleParseActor, new ParseHtmlArticle(msg.getUrl(), ((HttpResponse) rawArticle).getBody()), timeout)));
+                        return (x != null) ? CompletableFuture.completedFuture(x) : toJava(ask(httpClientActor, msg.getUrl(), timeout))
+                                .thenCompose(rawArticle -> toJava(ask(articleParseActor, new ParseHtmlArticle(msg.getUrl(), ((HttpResponse) rawArticle).getBody()), timeout)));
                     }).thenCompose(x -> x);
 
                     final ActorRef senderRef = sender();

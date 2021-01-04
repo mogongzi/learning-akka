@@ -30,6 +30,12 @@
             <artifactId>akka-actor-typed_2.13</artifactId>
             <version>${akka.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.scala-lang.modules/scala-java8-compat -->
+        <dependency>
+            <groupId>org.scala-lang.modules</groupId>
+            <artifactId>scala-java8-compat_2.13</artifactId>
+            <version>0.9.1</version>
+        </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
