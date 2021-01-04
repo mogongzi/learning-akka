@@ -28,6 +28,6 @@ public class BalancingPoolTest {
         long start = System.currentTimeMillis();
         future.get();
         long elapsedTime = System.currentTimeMillis() - start;
-        System.out.println("ReadFilesWithFuturesTest took: " + elapsedTime);
+        System.out.println("BalancingPoolTest took: " + elapsedTime);
     }
 }

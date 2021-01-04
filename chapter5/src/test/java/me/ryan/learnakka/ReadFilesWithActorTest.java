@@ -33,7 +33,7 @@ public class ReadFilesWithActorTest {
         long start = System.currentTimeMillis();
         future.get();
         long elapsedTime = System.currentTimeMillis() - start;
-        System.out.println("ReadFilesWithFuturesTest took: " + elapsedTime);
+        System.out.println("ReadFilesWithActorTest took: " + elapsedTime);
 
     }
 }
