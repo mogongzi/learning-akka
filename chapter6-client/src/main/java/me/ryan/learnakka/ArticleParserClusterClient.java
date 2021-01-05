@@ -17,6 +17,8 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import static akka.cluster.client.ClusterClient.*;
+
 public class ArticleParserClusterClient {
 
     public static void main(String[] args) throws TimeoutException, InterruptedException {
@@ -29,9 +31,9 @@ public class ArticleParserClusterClient {
                 ActorPath.fromString("akka.tcp://Akkademy@127.0.0.1:2551/system/receptionist")
         ));
 
-        ActorRef receptionist = system.actorOf(ClusterClient.props(ClusterClientSettings.create(system).withInitialContacts(initialContacts)));
+        ActorRef receptionist = system.actorOf(ClusterClient.props(ClusterClientSettings.create(system).withInitialContacts(initialContacts)), "client");
 
-        ClusterClient.Send msg = new ClusterClient.Send("/user/workers", articleToParse, false);
+        Send msg = new Send("/user/workers", articleToParse, false);
 
         Future f = Patterns.ask(receptionist, msg, timeout);
         String result = (String) Await.result(f, timeout.duration());
