@@ -1,13 +1,10 @@
 package me.ryan.learnakka;
 
-import akka.actor.Actor;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
 import akka.routing.RoundRobinPool;
-import com.jasongoodwin.monads.Futures;
 import org.junit.Test;
-import scala.concurrent.impl.FutureConvertersImpl;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
