@@ -20,6 +20,7 @@
         <module>chapter6-client</module>
         <module>chapter7</module>
         <module>chapter8</module>
+        <module>chapter9</module>
     </modules>
     <packaging>pom</packaging>
 
