@@ -13,12 +13,14 @@ public class Chatroom extends AbstractActor {
     @Override
     public Receive createReceive() {
         return receiveBuilder()
-                .match(Messages.JoinChatroom.class, this::joinChatroom)
+                .match(Messages.JoinChatroom.class, msg -> sender().tell(joinChatroom(msg), self()))
+                .match(Messages.PostToChatroom.class, msg -> joinedUsers.forEach(x -> x.getActor().tell(msg, self())))
                 .matchAny(o -> System.out.println("received unknown message"))
                 .build();
     }
 
-    public void joinChatroom(Messages.JoinChatroom message) {
+    public List<Messages.PostToChatroom> joinChatroom(Messages.JoinChatroom message) {
         joinedUsers.add(message.userRef);
+        return chatHistory;
     }
 }
