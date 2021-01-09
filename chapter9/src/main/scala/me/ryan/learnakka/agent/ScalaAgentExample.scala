@@ -36,7 +36,7 @@ object ScalaAgentExample {
     import scala.concurrent.stm._
     val wifeAccount = Agent(25)
     val husbandAccount = Agent(0)
-    val wasSuccess1 = atomic { txn =>
+    val wasSuccess1 = atomic { _ =>
       if (wifeAccount() >= 20) {
         wifeAccount.send(_ - 20)
         husbandAccount.send(_ + 20)
@@ -45,7 +45,7 @@ object ScalaAgentExample {
     }
     println("success?: " + wasSuccess1)
 
-    val wasSuccess2 = atomic { txn =>
+    val wasSuccess2 = atomic { _ =>
       if (wifeAccount() >= 20) {
         wifeAccount.send(_ - 20)
         husbandAccount.send(_ + 20)
